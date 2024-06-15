@@ -1,0 +1,75 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="stylesheet" href="style.css">
+    <title>Calculator</title>
+</head>
+<body>   
+    <div class="container">  
+        <H1 style="margin-right: 100PX;">CALCULATOR</H1>     
+        <div class="Calculator">
+            <input type="text" id="inputtext" placeholder="0">
+            <button onclick="C()">C</button>
+            <button onclick="DEL()">DEL</button>
+            <button onclick="display('%')">%</button>  
+            <button onclick="display('/')">/</button>
+            <button onclick="display('7')">7</button>
+            <button onclick="display('8')">8</button>
+            <button onclick="display('9')">9</button>
+            <button onclick="display('*')">*</button>
+            <button onclick="display('4')">4</button>
+            <button onclick="display('5')">5</button>
+            <button onclick="display('6')">6</button>
+            <button onclick="display('-')">-</button>
+            <button onclick="display('1')">1</button>
+            <button onclick="display('2')">2</button>
+            <button onclick="display('3')">3</button>
+            <button onclick="display('+')">+</button>
+             <button onclick="display('.')">.</button>
+             <button onclick="display('0')">0</button>
+             <button onclick="Caculate()" class="equal">=</button>
+
+        </div>
+    </div>
+    <script>
+const input = document.getElementById('inputtext');
+const buttons = document.querySelectorAll('button');
+
+function calculate(expression) {
+    console.log(expression);
+    console.log(typeof(expression));
+    try {
+        return new Function('return ' + expression)();
+    } catch (error) {
+        return 'Malformed Operation';
+    }
+}
+
+
+function operation(buttonValue) {
+    if (buttonValue === 'C') {
+        input.value = '';
+    } else if (buttonValue === 'DEL') {
+        input.value = input.value.slice(0, -1);
+    } else if (buttonValue === '=') {
+        input.value = calculate(input.value);
+    } else {
+        input.value += buttonValue;
+    }
+}
+
+buttons.forEach(button => {
+    let buttonValue = button.innerText;
+    button.addEventListener('click', function () {
+        operation(buttonValue);
+    });
+});
+
+
+Resources
+    </script>
+    
+</body>
+</html>
